@@ -16,7 +16,7 @@ public class Seller implements Serializable {
 	
 	private Department department;
 	
-	private Seller() {
+	public Seller() {
 		
 	}
 
