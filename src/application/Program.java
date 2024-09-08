@@ -37,6 +37,12 @@ public class Program {
 		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.00, department);
 		sellerDao.insert(newSeller);
 		System.out.println("Ususario inserido " + newSeller.getId());
+		
+		System.out.println("\n === TEST 5: Seller upadate ===");
+		seller = sellerDao.findById(8);
+		seller.setName("Ygor");
+		sellerDao.update(seller);
+		System.out.println("Ususario modificado " + seller);
 	}
 
 }
