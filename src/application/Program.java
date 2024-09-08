@@ -39,10 +39,14 @@ public class Program {
 		System.out.println("Ususario inserido " + newSeller.getId());
 		
 		System.out.println("\n === TEST 5: Seller upadate ===");
-		seller = sellerDao.findById(8);
+		seller = sellerDao.findById(9);
 		seller.setName("Ygor");
 		sellerDao.update(seller);
 		System.out.println("Ususario modificado " + seller);
+		
+		System.out.println("\n === TEST 6: Seller delete ===");
+		sellerDao.deleteById(9);
+		System.out.println("Usuario deletado ");
 	}
 
 }
