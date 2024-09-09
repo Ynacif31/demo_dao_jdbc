@@ -21,14 +21,62 @@ public class DepartmentDaoJDBC implements DepartmentDao{
 
 	@Override
 	public void insert(Department obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("INSERT INTO department "
+				+ "(Id, Name) "
+				+ "VALUES "
+				+ "(?, ?) ",
+				PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			st.setInt(1, obj.getId());
+			st.setString(2, obj.getName());
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					 int id = rs.getInt(1);
+					 obj.setId(id);
+				 }
+				 DB.closeResultSet(rs);
+			}else 
+				{
+				throw new DbException("Erro inesperado");
+			}
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
 	public void update(Department obj) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("UPDATE department "
+				+ "SET Name = ? "
+				+ "WHERE Id = ? ");
+			
+			st.setString(1, obj.getName());
+			st.setInt(2, obj.getId());
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if(rowsAffected == 0) {
+				throw new DbException("Nenhuma linha atualizada");
+			}
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
