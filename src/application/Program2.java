@@ -17,7 +17,7 @@ public class Program2 {
 	
 	
 	System.out.println("=== TEST 2: Department Insert ===");
-	Department newDepartment = new Department(6, "VideoGames");
+	Department newDepartment = new Department(7, "VideoGames");
 	departmentDao.insert(newDepartment);
 	System.out.println("Department inserido " + newDepartment.getId());
 	
@@ -25,6 +25,10 @@ public class Program2 {
 	Department newUpdate = new Department(5, "MicroOndas");
 	departmentDao.update(newUpdate);
 	System.out.println("Department atualizado " + newUpdate.getId());
+	
+	System.out.println("=== TEST 4: Department Delete ===");
+	departmentDao.deleteById(5);
+	System.out.println("Department deletado");
 	
 	}
 }
